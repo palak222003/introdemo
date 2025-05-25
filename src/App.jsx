@@ -1,7 +1,7 @@
 const Header = (props) => {
   return(
     <div>
-      <h1>{props.name}</h1>
+      <h1>{props.course}</h1>
     </div>
   )
 }
@@ -17,17 +17,21 @@ const Part = (props) =>{
 const Content = (props) =>{
   return(
     <div>
-      <Part name={props.name1} exercise={props.exercise1} />
-      <Part name={props.name2} exercise={props.exercise2}  />
-      <Part name={props.name3} exercise={props.exercise3}  />
+      <Part name={props.parts[0].name} exercise={props.parts[0].exercises} />
+      <Part name={props.parts[1].name} exercise={props.parts[1].exercises}  />
+      <Part name={props.parts[2].name} exercise={props.parts[2].exercises}  />
     </div>
   )
 }
 
 const Total =(props) => {
+  let total=0;
+  props.parts.forEach(val => {
+        total+=val.exercises;
+    });
   return(
     <div>
-      <p>Number of exercises {props.one+props.two+props.three}</p>
+      <p>Number of exercises {total}</p>
     </div>
   )
 }
@@ -50,13 +54,14 @@ const App = () => {
     }
   ]
 
-  return (
+    return (
     <div>
-      <Header name={course}/>
-      <Content name1={parts[0].name} name2={parts[1].name} name3={parts[2].name} exercise1={parts[0].exercises} exercise2={parts[1].exercises} exercise3={parts[2].exercises}/>
-      <Total one={parts[0].exercises} two={parts[1].exercises} three={parts[2].exercises} />
+      <Header course={course} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
   )
 }
+
 
 export default App
